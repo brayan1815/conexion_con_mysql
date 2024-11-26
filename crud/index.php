@@ -19,9 +19,12 @@ $sql3="SELECT * FROM lenguajes";
 $bandera3=$conexion->prepare($sql3);
 $bandera3->execute();
 $lenguajes= $bandera3->fetchAll();
+
+$sql4="SELECT * FROM usuarios";
+$bandera4=$conexion->prepare($sql4);
+$bandera4->execute();
+$usuarios= $bandera4->fetchAll();
 ?>
-
-
 
 
 <form action="controlador.php" method="post">
@@ -71,9 +74,7 @@ $lenguajes= $bandera3->fetchAll();
                 <input type="radio" name="genero_id" id="gen_<?=$value['id_genero']?>" value="<?=$value['id_genero']?>">
             <?php
             }
-            ?>
-        
-        
+            ?>     
     </div>
     <br>
     <div>
@@ -90,6 +91,34 @@ $lenguajes= $bandera3->fetchAll();
     </div>
     <br>
     <button>GUARDAR</button>
+    <br>
+
+    <table border="solid 1px">
+        <tr>
+            <td>id_usuario</td>
+            <td>Nombre_usuario</td>
+            <td>Apellido_usuario</td>
+            <td>correo_usuario</td>
+            <td>fecha_nacimiento</td>
+            <td>Genero</td>
+            <td>Ciudad</td>
+        </tr>
+        <?php foreach($usuarios as $key => $value){
+            ?>
+            <tr>
+                <td><?=$value['id_usuario']?></td>
+                <td><?=$value['nombre_usuario']?></td>
+                <td><?=$value['apellido_usuario']?></td>
+                <td><?=$value['correo_usuario']?></td>
+                <td><?=$value['fecha_nacimiento']?></td>
+                <td><?=$value['genero']?></td>
+                <td><?=$value['ciudad']?></td>
+                <td><a href="editar.php?id=<?=$value['id_usuario']?>">Actualizar</a></td>
+            </tr>
+
+            <?php
+        }?>
+    </table>
 </form>
 
 
