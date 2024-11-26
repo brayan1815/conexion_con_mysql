@@ -106,4 +106,6 @@ $len_usu= $bandera5->fetchAll();
         <?php
     }?>
 
-</form>
+</form> 
+
+<!-- kgh -->
