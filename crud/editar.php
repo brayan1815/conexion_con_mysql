@@ -20,40 +20,48 @@ $bandera3=$conexion->prepare($sql3);
 $bandera3->execute();
 $lenguajes= $bandera3->fetchAll();
 
-$user_id=$_GET['id'];
+$usuario_id = $_REQUEST['id'];
 
-$sql4="SELECT * FROM usuarios WHERE id_usuario = $user_id";
+$sql4="SELECT * FROM usuarios WHERE id_usuario = $usuario_id";
 $bandera4=$conexion->prepare($sql4);
 $bandera4->execute();
-$usuarios= $bandera4->fetchAll();
+$usuario= $bandera4->fetch();
 
-$sql5="SELECT * FROM lenguaje_usuario WHERE $user_id= id_usuario";
+//print_r($usuario['id_usuario']);
+//print_r($usuario['apellido_usuario']);
+//die();
+
+
+
+$sql5="SELECT * FROM lenguaje_usuario WHERE id_usuario = $usuario_id";
 $bandera5=$conexion->prepare($sql5);
 $bandera5->execute();
 $len_usu= $bandera5->fetchAll();
 
 ?>
-<form action="contro_actu.php" method="post">
-    <?php foreach($usuarios as $key => $value){ ?>
+<form action="contro_actu.php" method="POST">
         <div>
             <label for="nombre">Nombre: </label>
-            <input type="text" id="nombre" name="nombre_usuario" value="<?=$value['nombre_usuario']?>">
+            <input type="text" id="nombre" name="nombre_usuario" value="<?=$usuario['nombre_usuario']?>">
         </div>
+
+        <input type="hidden" name="id_usuario" value="<?=$usuario_id?>">
         <br>
         <div>
             <label for="apellidio">Apellido: </label>
-            <input type="text" id="apellido" name="apellido_usuario" value="<?=$value['apellido_usuario']?>">
+            <input type="text" id="apellido" name="apellido_usuario" value="<?=$usuario['apellido_usuario']?>">
         </div>
         <br>
         <div>
             <label for="correo">Correo: </label>
-            <input type="text" id="correo" name="correo_usuario" value="<?=$value['correo_usuario']?>">
+            <input type="text" id="correo" name="correo_usuario" value="<?=$usuario['correo_usuario']?>">
         </div>
         <br>
         <div>
             <label for="nacimiento">Fecha de nacimiento: </label>
-            <input type="date" id="nacimiento" name="fecha_nacimiento" value="<?=$value['fecha_nacimiento']?>">
+            <input type="date" id="nacimiento" name="fecha_nacimiento" value="<?=$usuario['fecha_nacimiento']?>">
         </div>
+        <!-- <input type="hidden" name="id" value=""> -->
         <br>
         <div>
         <label for="ciudad_id">Ciudad</label>
@@ -62,7 +70,7 @@ $len_usu= $bandera5->fetchAll();
             foreach($ciudades as $key => $ciu){
             ?>
                 <option id="<?=$ciu['id_ciudad']?>" value="<?=$ciu['id_ciudad']?>"
-                <?php if($value['ciudad']==$ciu['id_ciudad']){ ?>
+                <?php if($usuario['ciudad']==$ciu['id_ciudad']){ ?>
                 selected <?php } ?> >
                     <?=$ciu['ciudad']?>
                 </option>
@@ -78,7 +86,7 @@ $len_usu= $bandera5->fetchAll();
             foreach($generos as $key => $gen){?>
                 <label for="gen_<?=$gen['id_genero']?>"><?=$gen['genero']?></label>
                 <input type="radio" name="genero_id" id="gen_<?=$gen['id_genero']?>" value="<?=$gen['id_genero']?>"
-                <?php if($value['genero']== $gen['id_genero']){  ?>
+                <?php if($usuario['genero']== $gen['id_genero']){  ?>
                     checked <?php
                 } ?> >
             <?php
@@ -104,7 +112,11 @@ $len_usu= $bandera5->fetchAll();
             ?>   
     </div>
         <?php
-    }?>
+    ?>
+    <br>
+       <input type="submit" value="Actualizar">
+        <!-- <a href="contro_actu.php?id=<?=$usuario_id?>">a</a> -->
+    <br>
 
 </form> 
 
