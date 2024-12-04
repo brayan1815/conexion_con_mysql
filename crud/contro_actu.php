@@ -40,3 +40,4 @@ foreach ($lenguajes as $key => $value) {
     $stm2_insertlen->bindParam(":id_lenguaje",$value);
     $stm2_insertlen->execute();
 }
+header("Location: vista.php");

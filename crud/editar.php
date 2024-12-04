@@ -42,30 +42,31 @@ $len_usu= $bandera5->fetchAll();
 <form action="contro_actu.php" method="POST">
         <div>
             <label for="nombre">Nombre: </label>
-            <input type="text" id="nombre" name="nombre_usuario" value="<?=$usuario['nombre_usuario']?>">
+            <input type="text" id="nombre" name="nombre_usuario" value="<?=$usuario['nombre_usuario']?>" required pattern="[a-zA-Z]+" 
+            autocomplete="off">
         </div>
 
         <input type="hidden" name="id_usuario" value="<?=$usuario_id?>">
         <br>
         <div>
             <label for="apellidio">Apellido: </label>
-            <input type="text" id="apellido" name="apellido_usuario" value="<?=$usuario['apellido_usuario']?>">
+            <input type="text" id="apellido" name="apellido_usuario" value="<?=$usuario['apellido_usuario']?>" required pattern="[a-zA-Z]+">
         </div>
         <br>
         <div>
             <label for="correo">Correo: </label>
-            <input type="text" id="correo" name="correo_usuario" value="<?=$usuario['correo_usuario']?>">
+            <input type="text" id="correo" name="correo_usuario" value="<?=$usuario['correo_usuario']?>" required pattern="[a-zA-Z1-9]+@[A-Za-z]+[.][a-z]+">
         </div>
         <br>
         <div>
             <label for="nacimiento">Fecha de nacimiento: </label>
-            <input type="date" id="nacimiento" name="fecha_nacimiento" value="<?=$usuario['fecha_nacimiento']?>">
+            <input type="date" id="nacimiento" name="fecha_nacimiento" value="<?=$usuario['fecha_nacimiento']?>" required>
         </div>
         <!-- <input type="hidden" name="id" value=""> -->
         <br>
         <div>
         <label for="ciudad_id">Ciudad</label>
-        <select name="ciudad_id" id="ciudad_id">
+        <select name="ciudad_id" id="ciudad_id" required>
             <?php
             foreach($ciudades as $key => $ciu){
             ?>
@@ -85,7 +86,7 @@ $len_usu= $bandera5->fetchAll();
         <?php
             foreach($generos as $key => $gen){?>
                 <label for="gen_<?=$gen['id_genero']?>"><?=$gen['genero']?></label>
-                <input type="radio" name="genero_id" id="gen_<?=$gen['id_genero']?>" value="<?=$gen['id_genero']?>"
+                <input type="radio" name="genero_id" id="gen_<?=$gen['id_genero']?>" value="<?=$gen['id_genero']?>" required
                 <?php if($usuario['genero']== $gen['id_genero']){  ?>
                     checked <?php
                 } ?> >
@@ -119,5 +120,8 @@ $len_usu= $bandera5->fetchAll();
     <br>
 
 </form> 
+<?php
+
+?>
 
 <!-- kgh -->

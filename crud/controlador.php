@@ -41,4 +41,6 @@ foreach ($lenguajes as $key => $value) {
     $stm2->bindParam(":id_lenguaje",$value);
     $stm2->execute();
 }
+
+header("Location: index.php");
 //aaaaaaaaaaaaaaaaaaa
