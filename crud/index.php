@@ -103,6 +103,7 @@ $usuarios= $bandera4->fetchAll();
     <br>
     <button class="boton_guardar">GUARDAR</button>
     <br>
+    <a href="vista.php" class="link_ver_registro">ver registros</a>
 
 </form>
 

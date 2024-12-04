@@ -124,5 +124,8 @@
     border: none;
     font-weight: 600;
     cursor: pointer;
+}
 
+.link_ver_registro{
+    color: green;
 }

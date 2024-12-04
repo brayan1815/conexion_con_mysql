@@ -39,34 +39,38 @@ $bandera5->execute();
 $len_usu= $bandera5->fetchAll();
 
 ?>
-<form action="contro_actu.php" method="POST">
-        <div>
-            <label for="nombre">Nombre: </label>
+<link rel="stylesheet" href="estilos.css ">
+<form action="contro_actu.php" method="POST" class="formulario">
+    <div class="formulario__info">
+        <div class="formulario__info formulario__inputTex">
+            <label for="nombre" class="formulario__info formulario__label">Nombre: </label>
             <input type="text" id="nombre" name="nombre_usuario" value="<?=$usuario['nombre_usuario']?>" required pattern="[a-zA-Z]+" 
-            autocomplete="off">
+            autocomplete="off" class="formulario__info formulario__inTex" placeholder="Ingrese su nombre">
         </div>
 
         <input type="hidden" name="id_usuario" value="<?=$usuario_id?>">
         <br>
-        <div>
-            <label for="apellidio">Apellido: </label>
-            <input type="text" id="apellido" name="apellido_usuario" value="<?=$usuario['apellido_usuario']?>" required pattern="[a-zA-Z]+">
+        <div class="formulario__info formulario__inputTex">
+            <label for="apellidio" class="formulario__info formulario__label">Apellido: </label>
+            <input type="text" id="apellido" name="apellido_usuario" value="<?=$usuario['apellido_usuario']?>" required pattern="[a-zA-Z]+" 
+            class="formulario__info formulario__inTex" placeholder="Ingrese su apellido">
         </div>
         <br>
-        <div>
-            <label for="correo">Correo: </label>
-            <input type="text" id="correo" name="correo_usuario" value="<?=$usuario['correo_usuario']?>" required pattern="[a-zA-Z1-9]+@[A-Za-z]+[.][a-z]+">
+        <div class="formulario__info formulario__inputTex">
+            <label for="correo" class="formulario__info formulario__label">Correo: </label>
+            <input type="text" id="correo" name="correo_usuario" value="<?=$usuario['correo_usuario']?>" required pattern="[a-zA-Z1-9]+@[A-Za-z]+[.][a-z]+"
+            class="formulario__info formulario__inTex" placeholder="Ingrese su correo">
         </div>
         <br>
-        <div>
+        <div class="formulario__info formulario__inputfech">
             <label for="nacimiento">Fecha de nacimiento: </label>
-            <input type="date" id="nacimiento" name="fecha_nacimiento" value="<?=$usuario['fecha_nacimiento']?>" required>
+            <input type="date" id="nacimiento" name="fecha_nacimiento" value="<?=$usuario['fecha_nacimiento']?>" required class="formulario__info formulario__fecha">
         </div>
         <!-- <input type="hidden" name="id" value=""> -->
         <br>
-        <div>
+        <div class="formulario__info formulario__fecha_input">
         <label for="ciudad_id">Ciudad</label>
-        <select name="ciudad_id" id="ciudad_id" required>
+        <select name="ciudad_id" id="ciudad_id" required class="formulario__info formulario_ciud">
             <?php
             foreach($ciudades as $key => $ciu){
             ?>
@@ -83,24 +87,28 @@ $len_usu= $bandera5->fetchAll();
     <br>
     <div>
         <label for="genero_id">Genero: </label>
-        <?php
+        <div class="formulario__info formulario__sexo">
+            <?php
             foreach($generos as $key => $gen){?>
-                <label for="gen_<?=$gen['id_genero']?>"><?=$gen['genero']?></label>
-                <input type="radio" name="genero_id" id="gen_<?=$gen['id_genero']?>" value="<?=$gen['id_genero']?>" required
-                <?php if($usuario['genero']== $gen['id_genero']){  ?>
+                <input type="radio" name="genero_id" id="gen_<?=$gen['id_genero']?>" value="<?=$gen['id_genero']?>" required class="input_radio"
+                <?php if($usuario['genero']== $gen['id_genero']){  ?> 
                     checked <?php
                 } ?> >
+                <label for="gen_<?=$gen['id_genero']?>" class="textsex"><?=$gen['genero']?></label>
+
             <?php
             }
-            ?>     
+            ?> 
+        </div>
+    
     </div>
     <br>
     <div>
         <label for="lenguaje_id">Lenguajes: </label>
-        <?php
+        <div class="formulario__lenguajes">
+            <?php
             foreach($lenguajes as $key => $len){?>
-                <label for="len_<?=$len['id_lenguaje']?>"><?=$len['nombre_lenguaje']?></label>
-                <input type="checkbox" name="lenguaje_id[]" id="len_<?=$len['id_lenguaje']?>" value="<?=$len['id_lenguaje']?>"
+                <input class="input_checbox" type="checkbox" name="lenguaje_id[]" id="len_<?=$len['id_lenguaje']?>" value="<?=$len['id_lenguaje']?>"
                 <?php foreach ($len_usu as $key => $l){
                     if($len['id_lenguaje']==$l['id_lenguaje']){ ?>
                         
@@ -108,14 +116,20 @@ $len_usu= $bandera5->fetchAll();
                     <?php }
                     
                 } ?> >
+                <label for="len_<?=$len['id_lenguaje']?>" class="textlen"><?=$len['nombre_lenguaje']?></label>
+
             <?php
             }
-            ?>   
+            ?> 
+        </div>
+  
     </div>
         <?php
     ?>
+    </div>
+        
     <br>
-       <input type="submit" value="Actualizar">
+       <input type="submit" value="Actualizar" class="boton_guardar">
         <!-- <a href="contro_actu.php?id=<?=$usuario_id?>">a</a> -->
     <br>
 
